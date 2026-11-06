@@ -1,8 +1,21 @@
 flows:
-  transfer_money:
-    description: Help users send money to friends and family.
+  greet:
+    name: greet the user
+    description: The user says hello, hi or hey, or opens the conversation with a greeting.
     steps:
-      - collect: recipient
-      - collect: amount
-        description: the number of US dollars to send
-      - action: utter_transfer_complete
+      - action: utter_greeting
+
+  find_association:
+    name: find an association
+    description: >-
+      The user wants to find, join or get a recommendation for a student
+      association at Radboud University, for example based on a hobby, an
+      interest, their study programme, or because they want to meet new people.
+    steps:
+      - collect: category
+      - action: action_find_associations
+      - collect: association_name
+      - action: action_association_details
+      - action: utter_ask_anything_else
+
+  

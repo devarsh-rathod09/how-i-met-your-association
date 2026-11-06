@@ -1,35 +1,49 @@
 version: "3.1"
 
+actions:
+  - action_find_associations
+  - action_association_details
+
 slots:
-  recipient:
-    type: text
+  category:
+    type: categorical
+    values:
+      - sports
+      - creative
+      - social
+      - study
+      - international
     mappings:
       - type: from_llm
-  amount:
-    type: float
+  association_name:
+    type: text
     mappings:
       - type: from_llm
 
 responses:
-  utter_ask_recipient:
-    - text: "Who would you like to send money to?"
+  utter_greeting:
+    - text: "Hi, how can I help you?"
 
-  utter_ask_amount:
-    - text: "How much money would you like to send?"
+  utter_ask_category:
+    - text: "What are you into: sports, something creative, something social, people from your study, or other internationals?"
 
-  utter_transfer_complete:
-    - text: "All done. {amount} has been sent to {recipient}."
+  utter_ask_association_name:
+    - text: "Want the details on one of them? Just tell me which."
+
+  utter_ask_anything_else:
+    - text: "Want to check another kind of association, or compare a couple?"
 
   utter_free_chitchat_response:
     - text: "placeholder"
       metadata:
         rephrase: True
         rephrase_prompt: |
-          The following is a conversation with an AI assistant built with Rasa.
-          The assistant can help the user transfer money.
-          The assistant is helpful, creative, clever, and very friendly.
-          The user is making small talk, and the assistant should respond, keeping things light.
+          The following is a conversation with "How I Met Your Association", a chatbot that helps new and international students at Radboud University find a student association.
+          The assistant is casual, excited and knows the associations well. It has opinions, keeps its reply to one or two short sentences, and does not hand out compliments.
+          The user is making small talk. The assistant answers briefly, then steers back with a question about what the user is into or what kind of association they want.
           Context / previous conversation with the user:
           {{history}}
+
           {{current_input}}
+
           Suggested AI Response:
